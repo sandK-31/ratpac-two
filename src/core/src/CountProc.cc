@@ -45,7 +45,6 @@ Processor::Result CountProc::DSEvent(DS::Root *ds) {
 
   if (dscount % updateInterval == 0) info << dformat("CountProc: Event %d (%d triggered events)\n", dscount, evcount);
   return OK;
-
 }
 
 }  // namespace RAT
