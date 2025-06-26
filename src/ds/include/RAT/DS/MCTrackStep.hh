@@ -74,6 +74,8 @@ class MCTrackStep : public TObject {
   /** Name of detector volume in which this step took place. */
   virtual std::string GetVolume() const { return volume; }
   virtual void SetVolume(const std::string &_volume) { volume = _volume; }
+  virtual Double_t GetScintEdepQuenched() const { return scintEdepQuenched; }
+  virtual void SetScintEdepQuenched(Double_t _scintEdepQuenched) { scintEdepQuenched = _scintEdepQuenched; }
 
   ClassDef(MCTrackStep, 2);
 
@@ -84,6 +86,7 @@ class MCTrackStep : public TObject {
   Double_t properTime;
   Double_t ke;
   Double_t depositedEnergy;
+  Double_t scintEdepQuenched;
   TVector3 endpoint;
   TVector3 mom;
   std::string process;
