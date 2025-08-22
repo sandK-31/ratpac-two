@@ -101,7 +101,7 @@ class TokenizerStack {
 /** Parser of RATDB text format. */
 class Parser {
  public:
-  Parser(std::string str, std::string filename) : tokenizer(Tokenizer(str, filename)){};
+  Parser(std::string str, std::string filename) : tokenizer(Tokenizer(str, filename)) {};
 
   enum State {
     STATE_START,

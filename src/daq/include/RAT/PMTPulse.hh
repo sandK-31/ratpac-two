@@ -8,7 +8,7 @@ namespace RAT {
 class PMTPulse {
  public:
   PMTPulse(std::string pulseType, std::string pulseShape);
-  virtual ~PMTPulse(){};
+  virtual ~PMTPulse() {};
 
   virtual void SetPulseCharge(double _fPulseCharge) { fPulseCharge = _fPulseCharge; };
   virtual void SetPulseStartTime(double _fStartTime) { fStartTime = _fStartTime; };

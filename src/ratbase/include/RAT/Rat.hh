@@ -34,7 +34,7 @@ class Rat {
   inline static std::set<std::string> ratdb_directories = {};
   inline static std::set<std::string> model_directories = {};
 
-  Rat(AnyParse *parser, int argc, char **argv) : parser(parser), argc(argc), argv(argv){};
+  Rat(AnyParse *parser, int argc, char **argv) : parser(parser), argc(argc), argv(argv) {};
   ~Rat();
   virtual void Configure();
   void Begin();

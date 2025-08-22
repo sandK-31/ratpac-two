@@ -9,8 +9,8 @@ namespace RAT {
 
 class PrimaryVertexInformation : public G4VUserPrimaryVertexInformation {
  public:
-  PrimaryVertexInformation(){};
-  ~PrimaryVertexInformation(){};
+  PrimaryVertexInformation() {};
+  ~PrimaryVertexInformation() {};
 
   void Print() const {};  // required for G4VUserPrimaryVertexInformation
 

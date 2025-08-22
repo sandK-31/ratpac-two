@@ -6,7 +6,7 @@
 namespace RAT {
 class GeoReflectorWaveguideFactory : public GeoFactory {
  public:
-  GeoReflectorWaveguideFactory() : GeoFactory("reflector_waveguide"){};
+  GeoReflectorWaveguideFactory() : GeoFactory("reflector_waveguide") {};
 
   virtual G4VPhysicalVolume *Construct(DBLinkPtr table);
 };

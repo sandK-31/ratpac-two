@@ -239,7 +239,9 @@ bool OutNtupleProc::OpenFile(std::string filename) {
     outputTree->Branch("trackMomX", &trackMomX);
     outputTree->Branch("trackMomY", &trackMomY);
     outputTree->Branch("trackMomZ", &trackMomZ);
+    outputTree->Branch("trackEdep", &trackEdep);
     outputTree->Branch("trackKE", &trackKE);
+    outputTree->Branch("trackEdep", &trackEdep);
     outputTree->Branch("trackTime", &trackTime);
     outputTree->Branch("trackProcess", &trackProcess);
     metaTree->Branch("processCodeMap", &processCodeMap);
@@ -339,13 +341,15 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
     trackMomY.clear();
     trackMomZ.clear();
     trackKE.clear();
+    trackEdep.clear();
+    trackEdep.clear();
     trackTime.clear();
     trackProcess.clear();
     trackVolume.clear();
 
     std::vector<double> xtrack, ytrack, ztrack;
     std::vector<double> pxtrack, pytrack, pztrack;
-    std::vector<double> kinetic, globaltime;
+    std::vector<double> kinetic, globaltime, energy_deposited;
     std::vector<int> processMapID;
     std::vector<int> volumeMapID;
     for (int trk = 0; trk < nTracks; trk++) {
@@ -358,6 +362,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
       pytrack.clear();
       pztrack.clear();
       kinetic.clear();
+      energy_deposited.clear();
       globaltime.clear();
       processMapID.clear();
       volumeMapID.clear();
@@ -382,6 +387,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
         processMapID.push_back(processCodeMap[proc]);
         TVector3 tv = step->GetEndpoint();
         TVector3 momentum = step->GetMomentum();
+        energy_deposited.push_back(step->GetDepositedEnergy());
         kinetic.push_back(step->GetKE());
         globaltime.push_back(step->GetGlobalTime());
         xtrack.push_back(tv.X());
@@ -392,6 +398,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
         pztrack.push_back(momentum.Z());
       }
       trackKE.push_back(kinetic);
+      trackEdep.push_back(energy_deposited);
       trackTime.push_back(globaltime);
       trackPosX.push_back(xtrack);
       trackPosY.push_back(ytrack);

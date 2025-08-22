@@ -10,7 +10,7 @@
 namespace RAT {
 class GeoCalibrationStickFactory : public GeoFactory {
  public:
-  GeoCalibrationStickFactory() : GeoFactory("CalibrationStick"){};
+  GeoCalibrationStickFactory() : GeoFactory("CalibrationStick") {};
   virtual G4VPhysicalVolume *Construct(DBLinkPtr table);
 
  protected:

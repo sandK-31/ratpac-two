@@ -84,7 +84,7 @@ class TrackTest_Particle : public TrackTest {
   std::string fParticleName;
 
  public:
-  TrackTest_Particle(const std::string &particleName) : fParticleName(particleName){};
+  TrackTest_Particle(const std::string &particleName) : fParticleName(particleName) {};
   virtual bool operator()(TrackNode *c) { return fParticleName == c->GetParticleName(); };
 };
 

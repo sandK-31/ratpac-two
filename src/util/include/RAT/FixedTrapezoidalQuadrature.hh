@@ -19,7 +19,7 @@
 
 class FixedTrapezoidalQuadrature : public Quadrature {
  public:
-  FixedTrapezoidalQuadrature(){/**/};
+  FixedTrapezoidalQuadrature() { /**/ };
   FixedTrapezoidalQuadrature(double);
   virtual double Integrate(Evaluateable& f, const double xlo, const double xhi);
 

@@ -47,11 +47,11 @@ namespace RAT {
 
 class WaveformAnalysisSinc : public WaveformAnalyzerBase {
  public:
-  WaveformAnalysisSinc() : WaveformAnalysisSinc("TSincInterpolation"){};
+  WaveformAnalysisSinc() : WaveformAnalysisSinc("TSincInterpolation") {};
   WaveformAnalysisSinc(std::string config_name) : WaveformAnalyzerBase("WaveformAnalysisSinc", config_name) {
     Configure(config_name);
   };
-  virtual ~WaveformAnalysisSinc(){};
+  virtual ~WaveformAnalysisSinc() {};
   void Configure(const std::string &config_name) override;
   virtual void SetI(std::string param, int value) override;
   virtual void SetD(std::string param, double value) override;

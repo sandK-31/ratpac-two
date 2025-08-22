@@ -47,11 +47,11 @@ class OutNtupleProc : public Processor {
   virtual void EndOfRun(DS::Run *run) override;
 
   // Extensible functions
-  virtual void AssignAdditionalAddresses(){};
-  virtual void AssignAdditionalMetaAddresses(){};
-  virtual void FillEvent(DS::Root *, DS::EV *){};
-  virtual void FillNoTriggerEvent(DS::Root *){};
-  virtual void FillMeta(){};
+  virtual void AssignAdditionalAddresses() {};
+  virtual void AssignAdditionalMetaAddresses() {};
+  virtual void FillEvent(DS::Root *, DS::EV *) {};
+  virtual void FillNoTriggerEvent(DS::Root *) {};
+  virtual void FillMeta() {};
 
   // Exposed members for external tools
   DS::Run *runBranch;
@@ -225,6 +225,7 @@ class OutNtupleProc : public Processor {
   std::vector<std::vector<double>> trackMomY;
   std::vector<std::vector<double>> trackMomZ;
   std::vector<std::vector<double>> trackKE;
+  std::vector<std::vector<double>> trackEdep;
   std::vector<std::vector<double>> trackTime;
   std::vector<std::vector<int>> trackProcess;
   std::vector<std::vector<int>> trackVolume;

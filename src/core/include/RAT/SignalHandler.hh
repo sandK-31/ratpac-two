@@ -57,7 +57,7 @@ class SignalHandler {
 
  private:
   /** This class cannot be instantiated. */
-  SignalHandler(){/* Do nothing */};
+  SignalHandler() { /* Do nothing */ };
 
   /** Set to true if a SIGINT has been received. */
   static bool sigintPending;

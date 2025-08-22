@@ -21,8 +21,8 @@ namespace RAT {
 
 class PMTTime {
  public:
-  PMTTime(){};
-  virtual ~PMTTime(){};
+  PMTTime() {};
+  virtual ~PMTTime() {};
 
   /** Returns front end time for hit time. */
   virtual double PickTime(double time) const = 0;

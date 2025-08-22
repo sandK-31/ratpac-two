@@ -19,10 +19,10 @@ class MiniSim : public G4UserEventAction, G4UserTrackingAction, G4VUserPrimaryGe
 
   // Override these for your simulation needs
   virtual void GeneratePrimaries(G4Event *argEvent) = 0;  // You must override at least this
-  virtual void BeginOfEventAction(const G4Event * /*anEvent*/){};
-  virtual void EndOfEventAction(const G4Event * /*anEvent*/){};
-  virtual void PreUserTrackingAction(const G4Track * /*aTrack*/){};
-  virtual void PostUserTrackingAction(const G4Track * /*aTrack*/){};
+  virtual void BeginOfEventAction(const G4Event * /*anEvent*/) {};
+  virtual void EndOfEventAction(const G4Event * /*anEvent*/) {};
+  virtual void PreUserTrackingAction(const G4Track * /*aTrack*/) {};
+  virtual void PostUserTrackingAction(const G4Track * /*aTrack*/) {};
   virtual void UserSteppingAction(const G4Step *step);  // defaults to running scintillation/reemission
 
  protected:

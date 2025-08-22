@@ -24,11 +24,11 @@ namespace RAT {
 
 class WaveformAnalysisGaussian : public WaveformAnalyzerBase {
  public:
-  WaveformAnalysisGaussian() : WaveformAnalysisGaussian("GaussianFit"){};
+  WaveformAnalysisGaussian() : WaveformAnalysisGaussian("GaussianFit") {};
   WaveformAnalysisGaussian(std::string config_name) : WaveformAnalyzerBase("WaveformAnalysisGaussian", config_name) {
     Configure(config_name);
   };
-  virtual ~WaveformAnalysisGaussian(){};
+  virtual ~WaveformAnalysisGaussian() {};
   void Configure(const std::string &config_name) override;
   virtual void SetD(std::string param, double value) override;
 

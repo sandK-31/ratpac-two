@@ -28,8 +28,8 @@ namespace RAT {
 
 class Digitizer {
  public:
-  Digitizer(){};
-  virtual ~Digitizer(){};
+  Digitizer() {};
+  virtual ~Digitizer() {};
   Digitizer(std::string);
 
   virtual void SetDigitizerType(std::string);

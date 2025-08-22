@@ -12,7 +12,7 @@ namespace RAT {
 class AfterPulseProc : public Processor {
  public:
   AfterPulseProc();
-  virtual ~AfterPulseProc(){};
+  virtual ~AfterPulseProc() {};
   virtual Processor::Result DSEvent(DS::Root* ds);
   void BeginOfRun(DS::Run* run);
   void UpdatePMTModels(DS::PMTInfo* pmtinfo);

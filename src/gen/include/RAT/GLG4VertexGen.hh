@@ -25,8 +25,8 @@ class GLG4PrimaryGeneratorAction;
 /** Virtual base class for vertex generators */
 class GLG4VertexGen {
  public:
-  GLG4VertexGen(const char *arg_dbname = "vertex") : _dbname(arg_dbname){};
-  virtual ~GLG4VertexGen(){};
+  GLG4VertexGen(const char *arg_dbname = "vertex") : _dbname(arg_dbname) {};
+  virtual ~GLG4VertexGen() {};
   // Generate and add new vertex to this event.  Position and
   // time of vertex are offset from 0 by dx and dt.  (These
   // are usually derived from GLG4PosGen and GLG4TimeGen.)
@@ -43,7 +43,7 @@ class GLG4VertexGen {
   virtual bool ELimitable() { return false; };
   /** Optional method to limit the energies, must be supplied if ELimitable
    * returns true */
-  virtual void LimitEnergies(double, double){};
+  virtual void LimitEnergies(double, double) {};
   /** Optional method to return maximum energy possible for generator */
   virtual double EMaximum() { return 99999; };
   /** Optional method to return minimum energy possible for generator */

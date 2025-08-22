@@ -281,7 +281,7 @@ class DBNotFoundError {
    *  @param _field  Name of field which could not be found
    */
   DBNotFoundError(const std::string &_table, const std::string &_index, const std::string &_field)
-      : table(_table), index(_index), field(_field){};
+      : table(_table), index(_index), field(_field) {};
 
   /** Compare if @p other has the same table, index and field as @p this. */
   bool operator==(const DBNotFoundError &other) const {
@@ -311,7 +311,7 @@ class DBWrongTypeError : public DBNotFoundError {
    */
   DBWrongTypeError(const std::string &_table, const std::string &_index, const std::string &_field,
                    RAT::DBTable::FieldType _requestedType, RAT::DBTable::FieldType _actualType)
-      : DBNotFoundError(_table, _index, _field), requestedType(_requestedType), actualType(_actualType){};
+      : DBNotFoundError(_table, _index, _field), requestedType(_requestedType), actualType(_actualType) {};
 
   /** Compare if @p other has the same table, index and field as @p this. */
   bool operator==(const DBWrongTypeError &other) const {

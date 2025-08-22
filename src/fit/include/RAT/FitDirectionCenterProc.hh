@@ -30,7 +30,7 @@ class EV;
 
 class FitDirectionCenterProc : public Processor {
  public:
-  FitDirectionCenterProc() : Processor("fitdirectioncenter"), inputHandler(){};
+  FitDirectionCenterProc() : Processor("fitdirectioncenter"), inputHandler() {};
   virtual ~FitDirectionCenterProc() {}
 
   void BeginOfRun(DS::Run *run);

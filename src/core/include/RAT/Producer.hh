@@ -69,7 +69,7 @@ class Producer : public G4UImessenger {
   Producer(ProcBlock *theBlock);
 
   /** Destroy this producer.  Does not destroy the main block. */
-  virtual ~Producer(){/* Do nothing */};
+  virtual ~Producer() { /* Do nothing */ };
 
   /** Get a pointer to the main block used by this producer. */
   ProcBlock *GetMainBlock();

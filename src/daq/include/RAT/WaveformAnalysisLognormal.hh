@@ -32,11 +32,11 @@ namespace RAT {
 
 class WaveformAnalysisLognormal : public WaveformAnalyzerBase {
  public:
-  WaveformAnalysisLognormal() : WaveformAnalysisLognormal("LognormalFit"){};
+  WaveformAnalysisLognormal() : WaveformAnalysisLognormal("LognormalFit") {};
   WaveformAnalysisLognormal(std::string config_name) : WaveformAnalyzerBase("WaveformAnalysisLognormal", config_name) {
     Configure(config_name);
   };
-  virtual ~WaveformAnalysisLognormal(){};
+  virtual ~WaveformAnalysisLognormal() {};
   void Configure(const std::string &config_name) override;
   virtual void SetD(std::string param, double value) override;
 

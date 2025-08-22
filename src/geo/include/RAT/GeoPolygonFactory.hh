@@ -6,7 +6,7 @@
 namespace RAT {
 class GeoPolygonFactory : public GeoSolidFactory {
  public:
-  GeoPolygonFactory() : GeoSolidFactory("polygon"){};
+  GeoPolygonFactory() : GeoSolidFactory("polygon") {};
   virtual G4VSolid *ConstructSolid(DBLinkPtr table);
 };
 

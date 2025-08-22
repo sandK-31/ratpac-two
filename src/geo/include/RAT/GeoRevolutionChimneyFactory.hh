@@ -21,7 +21,7 @@
 namespace RAT {
 class GeoRevolutionChimneyFactory : public GeoSolidFactory {
  public:
-  GeoRevolutionChimneyFactory() : GeoSolidFactory("revolveChimney"){};
+  GeoRevolutionChimneyFactory() : GeoSolidFactory("revolveChimney") {};
   virtual G4VSolid *ConstructSolid(DBLinkPtr table);
 };
 

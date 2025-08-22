@@ -51,7 +51,7 @@
 // created the track.
 class GLG4DummyProcess : public G4VProcess {
  public:
-  GLG4DummyProcess(const G4String &aName = "NoName", G4ProcessType aType = fNotDefined) : G4VProcess(aName, aType){};
+  GLG4DummyProcess(const G4String &aName = "NoName", G4ProcessType aType = fNotDefined) : G4VProcess(aName, aType) {};
 
   // Bogus, not a real process
   virtual G4double AlongStepGetPhysicalInteractionLength(const G4Track & /*track*/, G4double /*previousStepSize*/,

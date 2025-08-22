@@ -11,7 +11,7 @@ namespace RAT {
 class SplitEVDAQProc : public Processor {
  public:
   SplitEVDAQProc();
-  virtual ~SplitEVDAQProc(){};
+  virtual ~SplitEVDAQProc() {};
   virtual Processor::Result DSEvent(DS::Root *ds);
   void SetD(std::string param, double value);
   void SetI(std::string param, int value);

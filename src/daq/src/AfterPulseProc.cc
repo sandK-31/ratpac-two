@@ -233,7 +233,7 @@ void AfterPulseProc::DetectAfterPulses(DS::MC* mc, DS::PMTInfo* pmtinfo, const u
           ++it;
         }
       }  // end loop over APs
-    }    // end loop over PEs
+    }  // end loop over PEs
     mcpmt->SortMCPhotons();
   }  // end loop over PMTs
 }

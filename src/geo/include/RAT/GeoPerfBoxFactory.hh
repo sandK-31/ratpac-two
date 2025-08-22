@@ -11,7 +11,7 @@
 namespace RAT {
 class GeoPerfBoxFactory : public GeoSolidFactory {
  public:
-  GeoPerfBoxFactory() : GeoSolidFactory("perfbox"){};
+  GeoPerfBoxFactory() : GeoSolidFactory("perfbox") {};
   virtual G4VSolid *ConstructSolid(DBLinkPtr table);
 };
 

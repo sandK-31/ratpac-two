@@ -101,9 +101,9 @@ class DBLink;
 
 class DBTableKey {
  public:
-  DBTableKey() : name(""), index(""), run(0){};
+  DBTableKey() : name(""), index(""), run(0) {};
   DBTableKey(const std::string &_name, const std::string &_index, const int _run = 0)
-      : name(_name), index(_index), run(_run){};
+      : name(_name), index(_index), run(_run) {};
 
   std::string name;
   std::string index;

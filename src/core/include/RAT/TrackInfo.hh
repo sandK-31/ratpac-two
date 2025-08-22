@@ -11,8 +11,8 @@ namespace RAT {
 
 class TrackInfo : public G4VUserTrackInformation {
  public:
-  TrackInfo(){};
-  virtual ~TrackInfo(){};
+  TrackInfo() {};
+  virtual ~TrackInfo() {};
 
   inline void *operator new(size_t);
   inline void operator delete(void *);

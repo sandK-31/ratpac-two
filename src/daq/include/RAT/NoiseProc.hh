@@ -12,7 +12,7 @@ namespace RAT {
 class NoiseProc : public Processor {
  public:
   NoiseProc();
-  virtual ~NoiseProc(){};
+  virtual ~NoiseProc() {};
   virtual Processor::Result DSEvent(DS::Root *ds);
   void BeginOfRun(DS::Run *run);
   void UpdatePMTModels(DS::PMTInfo *);

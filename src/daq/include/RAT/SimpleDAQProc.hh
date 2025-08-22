@@ -8,7 +8,7 @@ namespace RAT {
 class SimpleDAQProc : public Processor {
  public:
   SimpleDAQProc();
-  virtual ~SimpleDAQProc(){};
+  virtual ~SimpleDAQProc() {};
   virtual Processor::Result DSEvent(DS::Root *ds);
 
  protected:

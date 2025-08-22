@@ -22,7 +22,7 @@ class ProcAllocator {
    */
   virtual Processor *operator()() = 0;
 
-  virtual ~ProcAllocator(){};
+  virtual ~ProcAllocator() {};
 };
 
 /** @class ProcAllocatorTmpl
@@ -60,7 +60,7 @@ class ProcAllocatorTmpl : public ProcAllocator {
   /** Create new instance of processor subclass T */
   virtual Processor *operator()() { return new T; }
 
-  virtual ~ProcAllocatorTmpl(){};
+  virtual ~ProcAllocatorTmpl() {};
 };
 
 }  // namespace RAT

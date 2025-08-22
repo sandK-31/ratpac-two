@@ -48,10 +48,10 @@ class Processor {
    *
    *  @param[in] _name Short name of processor
    */
-  Processor(std::string _name) : name(_name){/* Do nothing */};
+  Processor(std::string _name) : name(_name) { /* Do nothing */ };
 
   /** Destroy processor. */
-  virtual ~Processor(){/* Do nothing */};
+  virtual ~Processor() { /* Do nothing */ };
 
   std::string GetName() const { return name; }
 
@@ -76,7 +76,7 @@ class Processor {
      *  @param[in]  _param  Name of parameter which triggered this
      *  error.
      */
-    ParamError(std::string _param) : param(_param){};
+    ParamError(std::string _param) : param(_param) {};
 
     std::string param; /**< Name of parameter which triggered this
                             error. */
@@ -91,7 +91,7 @@ class Processor {
      *
      *  @param[in]  _param  Name of unknown parameter
      */
-    ParamUnknown(std::string _param) : ParamError(_param){};
+    ParamUnknown(std::string _param) : ParamError(_param) {};
   };
 
   /** Exception thrown when parameter name is known, but value is
@@ -110,7 +110,7 @@ class Processor {
      *  @param[in]  _param  Name of parameter
      *  @param[in]  _msg    Message explaining problem with setting the value.
      */
-    ParamInvalid(std::string _param, std::string _msg) : ParamError(_param), msg(_msg){};
+    ParamInvalid(std::string _param, std::string _msg) : ParamError(_param), msg(_msg) {};
 
     std::string msg; /**< Message explaining problem. */
   };

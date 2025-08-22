@@ -13,8 +13,8 @@ class GLG4PosGen;
 // Base class for event generators
 class GLG4Gen {
  public:
-  GLG4Gen(){};
-  virtual ~GLG4Gen(){};
+  GLG4Gen() {};
+  virtual ~GLG4Gen() {};
   virtual void GenerateEvent(G4Event *event) = 0;
   virtual double NextTime() const { return nextTime; };
   virtual void SubtractTime(double time) { nextTime -= time; };
@@ -71,7 +71,7 @@ class GLG4Gen_DeferTrack : public GLG4Gen {
   GLG4Gen_DeferTrack(const G4Track *track);
   virtual ~GLG4Gen_DeferTrack();
   virtual void GenerateEvent(G4Event *event);
-  virtual void ResetTime(double /*offset*/){};
+  virtual void ResetTime(double /*offset*/) {};
   virtual bool IsRepeatable() const { return false; };
 
   virtual void SetState(G4String state);
