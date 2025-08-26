@@ -11,6 +11,13 @@
 
 #include "Math/Types.h"
 
+#include "G4ParticleTable.hh"
+#include "G4ParticleDefinition.hh"
+#include "G4ProcessManager.hh"
+#include "G4VProcess.hh"
+#include "G4PhysicalVolumeStore.hh"
+#include "G4VPhysicalVolume.hh"
+
 class TFile;
 class TTree;
 

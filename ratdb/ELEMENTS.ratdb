@@ -367,3 +367,24 @@
 "a":88.9,
 }
 
+{
+"name": "ELEMENT",
+"index": "Cerium",
+"run_range": [0, 0],
+
+"SYMBOL": "Ce",
+"z": 58,
+"a":140.116,
+}
+
+{
+"name": "ELEMENT",
+"index": "Bromine",
+"run_range": [0, 0],
+
+"SYMBOL": "Br",
+"z": 35,
+"a":79.904,
+}
+
+
