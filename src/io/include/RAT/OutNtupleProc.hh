@@ -9,14 +9,13 @@
 #include <RAT/Processor.hh>
 #include <functional>
 
-#include "Math/Types.h"
-
-#include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
-#include "G4ProcessManager.hh"
-#include "G4VProcess.hh"
+#include "G4ParticleTable.hh"
 #include "G4PhysicalVolumeStore.hh"
+#include "G4ProcessManager.hh"
 #include "G4VPhysicalVolume.hh"
+#include "G4VProcess.hh"
+#include "Math/Types.h"
 
 class TFile;
 class TTree;

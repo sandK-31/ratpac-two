@@ -36,19 +36,17 @@ OutNtupleProc::OutNtupleProc() : Processor("outntuple") {
   done_writing_calib = false;
 
   // Load options from the database
-  DB *db = DB::Get();
+  DB* db = DB::Get();
   DBLinkPtr table = db->GetLink("IO", "NtupleProc");
   try {
     defaultFilename = table->GetS("default_output_filename");
     if (defaultFilename.find(".") == std::string::npos) {
       defaultFilename += ".ntuple.root";
     }
-  } catch (DBNotFoundError &e) {
+  } catch (DBNotFoundError& e) {
     defaultFilename = "output.ntuple.root";
   }
 }
-
-
 
 bool OutNtupleProc::OpenFile(std::string filename) {
   outputFile = TFile::Open(filename.c_str(), "RECREATE");
@@ -83,6 +81,7 @@ bool OutNtupleProc::OpenFile(std::string filename) {
   outputTree = new TTree("output", "output");
   // These are the *first* particles MC positions, directions, and time
 
+
   // Save particle tracking information
   outputTree->Branch("trackPDG", &trackPDG);
   outputTree->Branch("trackPosX", &trackPosX);
@@ -102,16 +101,16 @@ bool OutNtupleProc::OpenFile(std::string filename) {
 
   this->AssignAdditionalAddresses();
 
-    // At the start of your simulation
+  // At the start of your simulation
   auto* volumeStore = G4PhysicalVolumeStore::GetInstance();
 
   for (auto* vol : *volumeStore) {
-      std::string volName = vol->GetName();
-      if (volumeCodeMap.find(volName) == volumeCodeMap.end()) {
-          volumeCodeMap[volName] = volumeCodeMap.size();
-          volumeCodeIndex.push_back(volumeCodeMap.size() - 1);
-          volumeName.push_back(volName);
-      }
+    std::string volName = vol->GetName();
+    if (volumeCodeMap.find(volName) == volumeCodeMap.end()) {
+      volumeCodeMap[volName] = volumeCodeMap.size();
+      volumeCodeIndex.push_back(volumeCodeMap.size() - 1);
+      volumeName.push_back(volName);
+    }
   }
 
   // At initialization
@@ -121,37 +120,37 @@ bool OutNtupleProc::OpenFile(std::string filename) {
   // Use the GetIterator() method
   G4ParticleTable::G4PTblDicIterator* particleIterator = particleTable->GetIterator();
 
-  particleIterator->reset(); // Reset the iterator to the start
+  particleIterator->reset();  // Reset the iterator to the start
   while ((*particleIterator)()) {
-      G4ParticleDefinition* particle = particleIterator->value();
-      // Now you can access processes for this particle as before
-      G4ProcessManager* pmanager = particle->GetProcessManager();
-      if (pmanager == nullptr) continue;
+    G4ParticleDefinition* particle = particleIterator->value();
+    // Now you can access processes for this particle as before
+    G4ProcessManager* pmanager = particle->GetProcessManager();
+    if (pmanager == nullptr) continue;
 
-      // Loop over processes
-      G4ProcessVector* processVector = pmanager->GetProcessList();
-      if (processVector == nullptr) continue;
-      for (std::size_t j = 0; j < processVector->size(); ++j) {
-          G4VProcess* proc = (*processVector)[j];
-          std::string procName = proc->GetProcessName();
-          if (processCodeMap.find(procName) == processCodeMap.end()) {
-              processCodeMap[procName] = processCodeMap.size();
-              processCodeIndex.push_back(processCodeMap.size() - 1);
-              processName.push_back(procName);
-          }
+    // Loop over processes
+    G4ProcessVector* processVector = pmanager->GetProcessList();
+    if (processVector == nullptr) continue;
+    for (std::size_t j = 0; j < processVector->size(); ++j) {
+      G4VProcess* proc = (*processVector)[j];
+      std::string procName = proc->GetProcessName();
+      if (processCodeMap.find(procName) == processCodeMap.end()) {
+        processCodeMap[procName] = processCodeMap.size();
+        processCodeIndex.push_back(processCodeMap.size() - 1);
+        processName.push_back(procName);
       }
+    }
   }
 
   return true;
 }
 
-Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
+Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   if (!this->outputFile) {
     if (!OpenFile(this->defaultFilename.c_str())) {
       Log::Die("No output file specified");
     }
   }
-  DS::MC *mc = ds->GetMC();
+  DS::MC* mc = ds->GetMC();
   runBranch = DS::RunStore::GetRun(ds);
   dsentries++;
   std::map<std::string, double> edep_per_volume;
@@ -179,9 +178,8 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
   std::vector<int> volumeMapID;
   double edep;
 
-
   for (int trk = 0; trk < nTracks; trk++) {
-    DS::MCTrack *track = mc->GetMCTrack(trk);
+    DS::MCTrack* track = mc->GetMCTrack(trk);
     trackPDG.push_back(track->GetPDGCode());
     xtrack.clear();
     ytrack.clear();
@@ -198,7 +196,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
     // You can now get the total energy deposited in, e.g., "detector" as:
 
     for (int stp = 0; stp < nSteps; stp++) {
-      DS::MCTrackStep *step = track->GetMCTrackStep(stp);
+      DS::MCTrackStep* step = track->GetMCTrackStep(stp);
       // Process
       std::string proc = step->GetProcess();
       // Volume
@@ -222,7 +220,6 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
       edep_per_volume[vol] += edep;
     }
 
-    
     trackKE.push_back(kinetic);
     trackEdep.push_back(energy_deposited);
     trackTime.push_back(globaltime);
@@ -234,17 +231,16 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root *ds) {
     trackMomZ.push_back(pztrack);
     trackProcess.push_back(processMapID);
     trackVolume.push_back(volumeMapID);
-
   }
 
-  if(edep_per_volume["cebr"] != 0 || edep_per_volume["scintillator"] != 0){
+  if (edep_per_volume["cebr"] != 0 || edep_per_volume["scintillator"] != 0) {
     outputTree->Fill();
   }
 
   return Processor::OK;
 }
 
-void OutNtupleProc::EndOfRun(DS::Run *run) {
+void OutNtupleProc::EndOfRun(DS::Run* run) {
   if (outputFile) {
     G4cout << "Closing output file " << outputFile->GetName() << std::endl;
     outputFile->cd();
@@ -258,7 +254,7 @@ void OutNtupleProc::EndOfRun(DS::Run *run) {
     metaTree->Fill();
     metaTree->Write();
     outputTree->Write();
-   
+
     /*
     TMap* dbtrace = Log::GetDBTraceMap();
     dbtrace->Write("db", TObject::kSingleKey);
