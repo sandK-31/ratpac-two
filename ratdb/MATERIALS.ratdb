@@ -1,4 +1,17 @@
 // -------------  General Environment ---------------
+{
+name: "MATERIAL",
+index: "cebr3",
+valid_begin : [0, 0],
+valid_end : [0, 0],
+density: 5.23,
+nelements: 2,
+nmaterials: 0,
+elements: ["Cerium","Bromine"],
+elemprop: [0.36889d, 0.63111d,],
+formula: "AROMATIC",
+}
+
 
 {
 "name": "MATERIAL",
@@ -188,6 +201,18 @@
 "nelements": 1,
 "nmaterials": 0,
 "elements": ["Lead"],
+"elemprop": [1.0],
+}
+
+
+{
+"name": "MATERIAL",
+"index": "cesium",
+"run_range" : [0, 0],
+"density": 1.886,
+"nelements": 1,
+"nmaterials": 0,
+"elements": ["Cesium"],
 "elemprop": [1.0],
 }
 

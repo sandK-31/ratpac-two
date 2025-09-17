@@ -3,6 +3,7 @@
 build_directory := build
 install_directory := $(PWD)/install
 
+
 all:
 	ln -sf $(PWD)/cformat.sh $(shell git rev-parse --git-common-dir)/hooks/pre-commit
 	cmake . -B$(build_directory) -DCMAKE_INSTALL_PREFIX=$(install_directory)
