@@ -8,7 +8,7 @@ namespace RAT {
 
 class DBFieldCallback {
  public:
-  virtual ~DBFieldCallback() {};
+  virtual ~DBFieldCallback(){};
   virtual std::vector<int> FetchIArray(const std::string &tableID, const std::string &fieldname) = 0;
   virtual std::vector<double> FetchDArray(const std::string &tableID, const std::string &fieldname) = 0;
 };

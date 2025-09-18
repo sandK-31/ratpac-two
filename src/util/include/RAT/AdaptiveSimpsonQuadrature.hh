@@ -20,8 +20,8 @@
 
 class AdaptiveSimpsonQuadrature : public Quadrature {
  public:
-  AdaptiveSimpsonQuadrature() { /**/ };
-  ~AdaptiveSimpsonQuadrature() { /**/ };
+  AdaptiveSimpsonQuadrature(){/**/};
+  ~AdaptiveSimpsonQuadrature(){/**/};
   AdaptiveSimpsonQuadrature(double _tolerance);
   virtual double Integrate(Evaluateable& f, const double xlo, const double xhi);
 

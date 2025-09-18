@@ -81,9 +81,10 @@ bool OutNtupleProc::OpenFile(std::string filename) {
   outputTree = new TTree("output", "output");
   // These are the *first* particles MC positions, directions, and time
 
-
   // Save particle tracking information
   outputTree->Branch("trackPDG", &trackPDG);
+  outputTree->Branch("trackID", &trackID);
+  outputTree->Branch("trackParentID", &trackParentID);
   outputTree->Branch("trackPosX", &trackPosX);
   outputTree->Branch("trackPosY", &trackPosY);
   outputTree->Branch("trackPosZ", &trackPosZ);
@@ -92,7 +93,6 @@ bool OutNtupleProc::OpenFile(std::string filename) {
   outputTree->Branch("trackMomZ", &trackMomZ);
   outputTree->Branch("trackEdep", &trackEdep);
   outputTree->Branch("trackKE", &trackKE);
-  outputTree->Branch("trackEdep", &trackEdep);
   outputTree->Branch("trackTime", &trackTime);
   outputTree->Branch("trackProcess", &trackProcess);
   metaTree->Branch("processCodeMap", &processCodeMap);
@@ -113,31 +113,110 @@ bool OutNtupleProc::OpenFile(std::string filename) {
     }
   }
 
-  // At initialization
-  // Get the particle table instance
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  // Define the list of processes we care about
+  std::vector<std::string> predefinedProcesses = {"Attenuation",
+                                                  "B+Inelastic",
+                                                  "B-Inelastic",
+                                                  "B0Inelastic",
+                                                  "Bc+Inelastic",
+                                                  "Bc-Inelastic",
+                                                  "Bs0Inelastic",
+                                                  "Cerenkov",
+                                                  "CoulombScat",
+                                                  "D+Inelastic",
+                                                  "D-Inelastic",
+                                                  "D0Inelastic",
+                                                  "Decay",
+                                                  "Ds+Inelastic",
+                                                  "Ds-Inelastic",
+                                                  "G4FastSimulationManagerProcess",
+                                                  "GammaGeneralProc",
+                                                  "He3Inelastic",
+                                                  "OpBoundary",
+                                                  "OpRayleigh",
+                                                  "RadioactiveDecay",
+                                                  "Rayl",
+                                                  "Transportation",
+                                                  "alphaInelastic",
+                                                  "annihil",
+                                                  "anti_B0Inelastic",
+                                                  "anti_Bs0Inelastic",
+                                                  "anti_D0Inelastic",
+                                                  "anti_He3Inelastic",
+                                                  "anti_alphaInelastic",
+                                                  "anti_deuteronInelastic",
+                                                  "anti_lambdaInelastic",
+                                                  "anti_lambda_bInelastic",
+                                                  "anti_lambda_c+Inelastic",
+                                                  "anti_neutronInelastic",
+                                                  "anti_omega-Inelastic",
+                                                  "anti_omega_b-Inelastic",
+                                                  "anti_omega_c0Inelastic",
+                                                  "anti_protonInelastic",
+                                                  "anti_sigma+Inelastic",
+                                                  "anti_sigma-Inelastic",
+                                                  "anti_tritonInelastic",
+                                                  "anti_xi-Inelastic",
+                                                  "anti_xi0Inelastic",
+                                                  "anti_xi_b-Inelastic",
+                                                  "anti_xi_b0Inelastic",
+                                                  "anti_xi_c+Inelastic",
+                                                  "anti_xi_c0Inelastic",
+                                                  "compt",
+                                                  "dInelastic",
+                                                  "eBrem",
+                                                  "eIoni",
+                                                  "electronNuclear",
+                                                  "hBertiniCaptureAtRest",
+                                                  "hBrems",
+                                                  "hFritiofCaptureAtRest",
+                                                  "hIoni",
+                                                  "hPairProd",
+                                                  "hadElastic",
+                                                  "ionElastic",
+                                                  "ionInelastic",
+                                                  "ionIoni",
+                                                  "kaon+Inelastic",
+                                                  "kaon-Inelastic",
+                                                  "kaon0LInelastic",
+                                                  "kaon0SInelastic",
+                                                  "lambdaInelastic",
+                                                  "lambda_bInelastic",
+                                                  "lambda_c+Inelastic",
+                                                  "msc",
+                                                  "muBrems",
+                                                  "muIoni",
+                                                  "muMinusCaptureAtRest",
+                                                  "muPairProd",
+                                                  "muonNuclear",
+                                                  "nCapture",
+                                                  "nFission",
+                                                  "neutronInelastic",
+                                                  "omega-Inelastic",
+                                                  "omega_b-Inelastic",
+                                                  "omega_c0Inelastic",
+                                                  "phot",
+                                                  "pi+Inelastic",
+                                                  "pi-Inelastic",
+                                                  "positronNuclear",
+                                                  "protonInelastic",
+                                                  "sigma+Inelastic",
+                                                  "sigma-Inelastic",
+                                                  "start",
+                                                  "tInelastic",
+                                                  "xi-Inelastic",
+                                                  "xi0Inelastic",
+                                                  "xi_b-Inelastic",
+                                                  "xi_b0Inelastic",
+                                                  "xi_c+Inelastic",
+                                                  "xi_c0Inelastic"};
 
-  // Use the GetIterator() method
-  G4ParticleTable::G4PTblDicIterator* particleIterator = particleTable->GetIterator();
-
-  particleIterator->reset();  // Reset the iterator to the start
-  while ((*particleIterator)()) {
-    G4ParticleDefinition* particle = particleIterator->value();
-    // Now you can access processes for this particle as before
-    G4ProcessManager* pmanager = particle->GetProcessManager();
-    if (pmanager == nullptr) continue;
-
-    // Loop over processes
-    G4ProcessVector* processVector = pmanager->GetProcessList();
-    if (processVector == nullptr) continue;
-    for (std::size_t j = 0; j < processVector->size(); ++j) {
-      G4VProcess* proc = (*processVector)[j];
-      std::string procName = proc->GetProcessName();
-      if (processCodeMap.find(procName) == processCodeMap.end()) {
-        processCodeMap[procName] = processCodeMap.size();
-        processCodeIndex.push_back(processCodeMap.size() - 1);
-        processName.push_back(procName);
-      }
+  // Fill the process maps directly
+  for (const auto& procName : predefinedProcesses) {
+    if (processCodeMap.find(procName) == processCodeMap.end()) {
+      processCodeMap[procName] = processCodeMap.size();
+      processCodeIndex.push_back(processCodeMap.size() - 1);
+      processName.push_back(procName);
     }
   }
 
@@ -159,6 +238,8 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   // Clear previous event
   edep_per_volume.clear();
   trackPDG.clear();
+  trackID.clear();
+  trackParentID.clear();
   trackPosX.clear();
   trackPosY.clear();
   trackPosZ.clear();
@@ -181,6 +262,8 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   for (int trk = 0; trk < nTracks; trk++) {
     DS::MCTrack* track = mc->GetMCTrack(trk);
     trackPDG.push_back(track->GetPDGCode());
+    trackID.push_back(track->GetID());
+    trackParentID.push_back(track->GetParentID());
     xtrack.clear();
     ytrack.clear();
     ztrack.clear();
@@ -203,8 +286,8 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       std::string vol = step->GetVolume();
 
       edep = step->GetDepositedEnergy();
-      volumeMapID.push_back(volumeCodeMap[vol]);
-      processMapID.push_back(processCodeMap[proc]);
+      volumeMapID.push_back(volumeCodeMap.at(vol));
+      processMapID.push_back(processCodeMap.at(proc));
       TVector3 tv = step->GetEndpoint();
       TVector3 momentum = step->GetMomentum();
       energy_deposited.push_back(edep);

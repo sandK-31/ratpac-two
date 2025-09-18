@@ -6,7 +6,7 @@
 namespace RAT {
 class PMTCoverageFactory : public PMTFactoryBase {
  public:
-  PMTCoverageFactory() : PMTFactoryBase("pmtcoverage") {};
+  PMTCoverageFactory() : PMTFactoryBase("pmtcoverage"){};
   virtual G4VPhysicalVolume *Construct(DBLinkPtr table);
 };
 }  // namespace RAT

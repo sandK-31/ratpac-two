@@ -2,7 +2,7 @@
 
 build_directory := build
 install_directory := $(PWD)/install
-
+CXX := /usr/bin/g++
 
 all:
 	ln -sf $(PWD)/cformat.sh $(shell git rev-parse --git-common-dir)/hooks/pre-commit

@@ -11,7 +11,7 @@ namespace RAT {
 
 class GeoFactoryNotFoundError {
  public:
-  GeoFactoryNotFoundError(const std::string &name) : fName(name) {};
+  GeoFactoryNotFoundError(const std::string &name) : fName(name){};
   std::string fName;
 };
 

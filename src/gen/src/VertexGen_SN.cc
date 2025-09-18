@@ -504,7 +504,7 @@ CLHEP::HepLorentzVector VertexGen_SN::GetEmomentum(G4double enu, G4double eelect
   // Astrophysics,
   // Oxford University Press, Oxford, 2007.
   G4double theta =
-      acos((sqrt(((eelectron * (pow((m_e + enu), 2))) / ((2 * m_e * (pow(enu, 2))) + ((pow(enu, 2))*eelectron))))));
+      acos((sqrt(((eelectron * (pow((m_e + enu), 2))) / ((2 * m_e * (pow(enu, 2))) + ((pow(enu, 2)) * eelectron))))));
 
 #ifdef DEBUG
   debug << "Neutrino std::vector = {" << neutrino_dir.x() << ", " << neutrino_dir.y() << ", " << neutrino_dir.z() << "}"

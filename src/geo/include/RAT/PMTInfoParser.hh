@@ -12,7 +12,7 @@ namespace RAT {
 class PMTInfoParser {
  public:
   PMTInfoParser(DBLinkPtr table, const std::string &mother_name);
-  ~PMTInfoParser() {};
+  ~PMTInfoParser(){};
 
   // Returns total number of PMTs described by the PMTINFO table
   int GetPMTCount() const { return fPos.size(); };

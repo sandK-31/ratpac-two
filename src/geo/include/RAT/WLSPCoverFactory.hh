@@ -7,7 +7,7 @@
 namespace RAT {
 class WLSPCoverFactory : public GeoSolidArrayFactoryBase {
  public:
-  WLSPCoverFactory() : GeoSolidArrayFactoryBase("wlsp_cover") {};
+  WLSPCoverFactory() : GeoSolidArrayFactoryBase("wlsp_cover"){};
   virtual G4VPhysicalVolume *Construct(DBLinkPtr table);
 };
 

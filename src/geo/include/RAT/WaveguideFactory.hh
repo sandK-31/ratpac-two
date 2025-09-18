@@ -8,7 +8,7 @@ namespace RAT {
 
 class WaveguideFactory {
  public:
-  WaveguideFactory() : fPMTBody(0) {};
+  WaveguideFactory() : fPMTBody(0){};
   virtual void SetTable(std::string table, std::string index = "") { fTable = DB::Get()->GetLink(table, index); };
   virtual void SetPMTBodySolid(G4VSolid *pmtBody) { fPMTBody = pmtBody; };
   virtual G4LogicalVolume *Construct(const std::string &name, G4LogicalVolume *mother, bool invisible = false) = 0;

@@ -8,7 +8,7 @@ namespace RAT {
 
 class ConeWaveguideFactory : public WaveguideFactory {
  public:
-  ConeWaveguideFactory() : WaveguideFactory() {};
+  ConeWaveguideFactory() : WaveguideFactory(){};
   virtual void SetTable(std::string table, std::string index = "");
   virtual G4LogicalVolume *Construct(const std::string &name, G4LogicalVolume *mother, bool invisible = false);
   virtual G4ThreeVector GetPlacementOffset();

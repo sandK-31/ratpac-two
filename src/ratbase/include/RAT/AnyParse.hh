@@ -11,7 +11,7 @@ enum ConvertType { ParseInt, ParseDouble, ParseString };
 
 class AnyParse {
  public:
-  AnyParse() {};
+  AnyParse(){};
   AnyParse(int argc, char **argv);
 
   template <typename T>

@@ -6,7 +6,7 @@
 namespace RAT {
 class GeoRevArrayFactory : public GeoSolidArrayFactoryBase {
  public:
-  GeoRevArrayFactory() : GeoSolidArrayFactoryBase("revarray") {};
+  GeoRevArrayFactory() : GeoSolidArrayFactoryBase("revarray"){};
   virtual G4VPhysicalVolume *Construct(DBLinkPtr table);
 };
 

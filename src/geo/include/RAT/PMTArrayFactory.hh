@@ -6,7 +6,7 @@
 namespace RAT {
 class PMTArrayFactory : public PMTFactoryBase {
  public:
-  PMTArrayFactory() : PMTFactoryBase("pmtarray") {};
+  PMTArrayFactory() : PMTFactoryBase("pmtarray"){};
   virtual G4VPhysicalVolume *Construct(DBLinkPtr table);
 };
 

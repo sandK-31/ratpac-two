@@ -24,8 +24,8 @@
 
 class EnergyLossFunction {
  public:
-  EnergyLossFunction() { /**/ };
-  ~EnergyLossFunction() { /**/ };
+  EnergyLossFunction(){/**/};
+  ~EnergyLossFunction(){/**/};
   EnergyLossFunction(const G4ParticleDefinition* _def, const G4Material* _mat);
   double Evaluate(double x);
 

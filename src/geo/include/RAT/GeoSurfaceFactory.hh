@@ -23,7 +23,7 @@ namespace RAT {
 
 class GeoSurfaceFactory : public GeoFactory {
  public:
-  GeoSurfaceFactory() : GeoFactory("border") {};
+  GeoSurfaceFactory() : GeoFactory("border"){};
   virtual G4VPhysicalVolume *Construct(DBLinkPtr table);
 };
 

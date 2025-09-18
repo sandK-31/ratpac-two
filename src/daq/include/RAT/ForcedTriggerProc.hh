@@ -11,7 +11,7 @@ namespace RAT {
 class ForcedTriggerProc : public Processor {
  public:
   ForcedTriggerProc();
-  virtual ~ForcedTriggerProc() {};
+  virtual ~ForcedTriggerProc(){};
   virtual Processor::Result DSEvent(DS::Root *ds);
 
   void BeginOfRun(DS::Run *run);

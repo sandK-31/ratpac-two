@@ -19,7 +19,7 @@ execute_process(
 if(NOT RATVERSION_SEMVERS)
   set(RATVERSION_SEMVERS 3.2.0)
 endif()
-
+set(RATVERSION_SEMVERS 3.2.0)
 project(ratpac
   DESCRIPTION "RAT, Plus Additional Code, Version 2"
   HOMEPAGE_URL "https://ratpac.readthedocs.io/en/latest/"

@@ -6,7 +6,7 @@
 namespace RAT {
 class GeoPerfTubeFactory : public GeoSolidFactory {
  public:
-  GeoPerfTubeFactory() : GeoSolidFactory("ptube") {};
+  GeoPerfTubeFactory() : GeoSolidFactory("ptube"){};
   virtual G4VSolid *ConstructSolid(DBLinkPtr table);
 };
 

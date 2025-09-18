@@ -7,7 +7,7 @@
 namespace RAT {
 class PMTFactoryBase : public GeoFactory {
  public:
-  PMTFactoryBase(const std::string &name) : GeoFactory(name) {};
+  PMTFactoryBase(const std::string &name) : GeoFactory(name){};
   static const DS::PMTInfo &GetPMTInfo() { return pmtinfo; }
 
  protected:

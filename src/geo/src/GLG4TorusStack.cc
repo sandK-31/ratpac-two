@@ -894,7 +894,7 @@ G4double GLG4TorusStack::DistanceToIn(const G4ThreeVector &p, const G4ThreeVecto
         break;
       }
     }  // end of exact intercept for track through bounding cyl
-  }  // end of edge scan
+  }    // end of edge scan
 
   // don't bother checking to see if intercept is inside
   // subtracted (inner) volume, since that should only happen on ends
@@ -1049,7 +1049,7 @@ G4double GLG4TorusStack::DistanceToOut(const G4ThreeVector &p, const G4ThreeVect
         break;
       }
     }  // end of exact intercept for track through bounding cyl
-  }  // end of edge scan
+  }    // end of edge scan
 
   // check for intersection with flat end
   if (v.z() > 0.0) {

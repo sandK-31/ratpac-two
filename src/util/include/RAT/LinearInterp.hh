@@ -28,7 +28,7 @@ class LinearInterp {
   class RangeError {
    public:
     RangeError(const NumType _xlow, const NumType _xhigh, const NumType _xeval)
-        : xlow(_xlow), xhigh(_xhigh), xeval(_xeval) { /* no-op */ };
+        : xlow(_xlow), xhigh(_xhigh), xeval(_xeval){/* no-op */};
     bool operator==(const RangeError &other) const {
       return xlow == other.xlow && xhigh == other.xhigh && xeval == other.xeval;
     };

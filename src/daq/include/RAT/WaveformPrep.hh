@@ -33,7 +33,7 @@ class WaveformPrep : public Processor {
  public:
   WaveformPrep();
   WaveformPrep(std::string analyzer_name);
-  virtual ~WaveformPrep() {};
+  virtual ~WaveformPrep(){};
 
   void Configure(const std::string &analyzer_name);
   void RunAnalysis(DS::DigitPMT *digitpmt, int pmtID, Digitizer *fDigitizer, double timeOffset = 0.0);

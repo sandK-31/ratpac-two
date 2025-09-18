@@ -370,7 +370,7 @@ void restore_context::register_all(restore_context::installer _installer) {
 // so the macro does nothing in that mode but maps little-endian onto
 // big-endian addressing in big-endian mode
 
-#define INDEX(index) ((context.little_endian()) ? (index) : ((bytes) - (index) - 1))
+#define INDEX(index) ((context.little_endian()) ? (index) : ((bytes) - (index)-1))
 
 ////////////////////////////////////////////////////////////////////////////////
 // Integer types

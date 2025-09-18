@@ -198,7 +198,7 @@ class persistent : public clonable {
  public:
   virtual void dump(dump_context&) const throw() = 0;
   virtual void restore(restore_context&) throw() = 0;
-  virtual ~persistent() {};
+  virtual ~persistent(){};
 };
 
 ////////////////////////////////////////////////////////////////////////////////

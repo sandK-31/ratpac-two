@@ -7,7 +7,7 @@ namespace RAT {
 
 class discard_streambuf : public std::streambuf {
  public:
-  discard_streambuf() {};
+  discard_streambuf(){};
 
   virtual int_type overflow(int_type c) { return c; };
 };

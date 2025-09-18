@@ -19,8 +19,7 @@ class ParseError : public TextLoaderError {
    *  @param l         Contents of erroneous line from file.
    *  @param mes       Message explaining specific error.
    */
-  ParseError(int lnum, int cnum, std::string l, std::string mes)
-      : linenum(lnum), colnum(cnum), line(l), message(mes) {};
+  ParseError(int lnum, int cnum, std::string l, std::string mes) : linenum(lnum), colnum(cnum), line(l), message(mes){};
 
   /** Return formatted string explaining parse error.
    *
@@ -50,13 +49,13 @@ class ParseError : public TextLoaderError {
 
 class ProbablyJSONParseError : public ParseError {
  public:
-  ProbablyJSONParseError(int lnum, int cnum, std::string l, std::string mes) : ParseError(lnum, cnum, l, mes) {};
+  ProbablyJSONParseError(int lnum, int cnum, std::string l, std::string mes) : ParseError(lnum, cnum, l, mes){};
 };
 
 /** Exception: Base class of file errors in RATDB. */
 class FileError : public TextLoaderError {
  public:
-  FileError(std::string _filename) : filename(_filename) {};
+  FileError(std::string _filename) : filename(_filename){};
   bool operator==(const FileError &other) const { return filename == other.filename; };
 
   std::string filename;
@@ -65,13 +64,13 @@ class FileError : public TextLoaderError {
 /** Exception: Error finding RATDB file. */
 class FileNotFoundError : public FileError {
  public:
-  FileNotFoundError(std::string _filename) : FileError(_filename) {};
+  FileNotFoundError(std::string _filename) : FileError(_filename){};
 };
 
 /** Exception: Insufficient access privileges to read file. */
 class FileAccessError : public FileError {
  public:
-  FileAccessError(std::string _filename) : FileError(_filename) {};
+  FileAccessError(std::string _filename) : FileError(_filename){};
 };
 
 }  // namespace RAT

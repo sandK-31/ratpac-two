@@ -26,7 +26,7 @@
 namespace RAT {
 class GeoCherenkovSourceFactory : public GeoFactory {
  public:
-  GeoCherenkovSourceFactory() : GeoFactory("CherenkovSource") {};
+  GeoCherenkovSourceFactory() : GeoFactory("CherenkovSource"){};
   virtual G4VPhysicalVolume *Construct(DBLinkPtr table);
 
  protected:
