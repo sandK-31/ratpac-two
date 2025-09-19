@@ -252,9 +252,9 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   trackTime.clear();
   trackProcess.clear();
   trackVolume.clear();
-  std::vector<double> xtrack, ytrack, ztrack;
-  std::vector<double> pxtrack, pytrack, pztrack;
-  std::vector<double> kinetic, globaltime, energy_deposited;
+  std::vector<int16_t> xtrack, ytrack, ztrack;
+  std::vector<float> pxtrack, pytrack, pztrack;
+  std::vector<float> kinetic, globaltime, energy_deposited;
   std::vector<int> processMapID;
   std::vector<int> volumeMapID;
   double edep;
@@ -293,9 +293,9 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       energy_deposited.push_back(edep);
       kinetic.push_back(step->GetKE());
       globaltime.push_back(step->GetGlobalTime());
-      xtrack.push_back(tv.X());
-      ytrack.push_back(tv.Y());
-      ztrack.push_back(tv.Z());
+      xtrack.push_back(static_cast<int16_t>(std::round(tv.X())));  // store as mm
+      ytrack.push_back(static_cast<int16_t>(std::round(tv.Y())));
+      ztrack.push_back(static_cast<int16_t>(std::round(tv.Z())));
       pxtrack.push_back(momentum.X());
       pytrack.push_back(momentum.Y());
       pztrack.push_back(momentum.Z());
@@ -316,12 +316,17 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
     trackVolume.push_back(volumeMapID);
   }
 
-  /*
-  if (edep_per_volume["cebr"] != 0 || edep_per_volume["scintillator"] != 0) {
-    outputTree->Fill();
+  
+  if ((edep_per_volume.find("cebr_1") != edep_per_volume.end() && edep_per_volume["cebr_1"] != 0) ||
+    (edep_per_volume.find("cebr_2") != edep_per_volume.end() && edep_per_volume["cebr_2"] != 0) ||
+    (edep_per_volume.find("cebr_3") != edep_per_volume.end() && edep_per_volume["cebr_3"] != 0) ||
+    (edep_per_volume.find("cebr_4") != edep_per_volume.end() && edep_per_volume["cebr_4"] != 0) ||
+    (edep_per_volume.find("scintillator") != edep_per_volume.end() && edep_per_volume["scintillator"] != 0))
+  {
+      outputTree->Fill();
   }
-  */
-  outputTree->Fill();
+  
+  //outputTree->Fill();
 
   return Processor::OK;
 }
