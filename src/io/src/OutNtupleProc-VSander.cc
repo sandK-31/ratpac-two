@@ -316,9 +316,12 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
     trackVolume.push_back(volumeMapID);
   }
 
+  /*
   if (edep_per_volume["cebr"] != 0 || edep_per_volume["scintillator"] != 0) {
     outputTree->Fill();
   }
+  */
+  outputTree->Fill();
 
   return Processor::OK;
 }
