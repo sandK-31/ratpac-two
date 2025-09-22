@@ -238,6 +238,29 @@ class OutNtupleProc : public Processor {
   std::vector<std::vector<int>> trackProcess;
   std::vector<std::vector<int>> trackVolume;
 
+  // // Tracking
+  // std::vector<int> trackPDG;
+  // std::vector<int> trackID;
+  // std::vector<int> trackParentID;
+
+  // // Positions stored as int16_t (mm precision)
+  // std::vector<std::vector<int>> trackPosX;
+  // std::vector<std::vector<int>> trackPosY;
+  // std::vector<std::vector<int>> trackPosZ;
+
+  // // Momenta, KE, energy, time stored as float
+  // std::vector<std::vector<double>> trackMomX;
+  // std::vector<std::vector<double>> trackMomY;
+  // std::vector<std::vector<double>> trackMomZ;
+  // std::vector<std::vector<double>> trackKE;
+  // std::vector<std::vector<double>> trackEdep;
+  // std::vector<std::vector<double>> trackTime;
+
+  // // Process and volume IDs
+  // std::vector<std::vector<int>> trackProcess;
+  // std::vector<std::vector<int>> trackVolume;
+
+
   std::set<std::string> branchNames;
 
   template <typename T>
