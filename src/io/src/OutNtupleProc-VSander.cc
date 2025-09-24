@@ -301,7 +301,6 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       pztrack.push_back(momentum.Z());
       // or step->GetTotalEnergyDeposit(
       edep_per_volume[vol] += edep;
-    
     }
 
     trackKE.push_back(kinetic);
@@ -324,7 +323,6 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       (edep_per_volume.find("scintillator") != edep_per_volume.end() && edep_per_volume["scintillator"] != 0)) {
     outputTree->Fill();
   }
-
 
   return Processor::OK;
 }
