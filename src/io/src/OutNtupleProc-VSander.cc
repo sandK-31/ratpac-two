@@ -320,9 +320,31 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       (edep_per_volume.find("cebr_2") != edep_per_volume.end() && edep_per_volume["cebr_2"] != 0) ||
       (edep_per_volume.find("cebr_3") != edep_per_volume.end() && edep_per_volume["cebr_3"] != 0) ||
       (edep_per_volume.find("cebr_4") != edep_per_volume.end() && edep_per_volume["cebr_4"] != 0) ||
+      (edep_per_volume.find("cebr_5") != edep_per_volume.end() && edep_per_volume["cebr_5"] != 0) ||
+      (edep_per_volume.find("cebr_6") != edep_per_volume.end() && edep_per_volume["cebr_6"] != 0) ||
+      (edep_per_volume.find("cebr_7") != edep_per_volume.end() && edep_per_volume["cebr_7"] != 0) ||
+      (edep_per_volume.find("cebr_8") != edep_per_volume.end() && edep_per_volume["cebr_8"] != 0) ||
+      (edep_per_volume.find("cebr_9") != edep_per_volume.end() && edep_per_volume["cebr_9"] != 0) ||
+      (edep_per_volume.find("cebr_10") != edep_per_volume.end() && edep_per_volume["cebr_10"] != 0) ||
       (edep_per_volume.find("scintillator") != edep_per_volume.end() && edep_per_volume["scintillator"] != 0)) {
     outputTree->Fill();
   }
+  /*
+  FOR FUTURE USE!!!!
+    std::vector<std::string> volumes = {
+      "cebr_1", "cebr_2", "cebr_3", "cebr_4", "cebr_5",
+      "cebr_6", "cebr_7", "cebr_8", "cebr_9", "cebr_10",
+      "scintillator"
+  };
+
+  for (const auto& vol : volumes) {
+      auto it = edep_per_volume.find(vol);
+      if (it != edep_per_volume.end() && it->second != 0) {
+          outputTree->Fill();
+          break;  // only need one match
+      }
+  }
+    */
 
   return Processor::OK;
 }
