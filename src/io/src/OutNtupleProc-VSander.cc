@@ -113,6 +113,13 @@ bool OutNtupleProc::OpenFile(std::string filename) {
     }
   }
 
+  for (const auto& kv : volumeCodeMap) {
+    const std::string& volName = kv.first;
+    trackEdepPerVolume[volName] = 0.0;
+    std::string branchName = "edep_" + volName;
+    outputTree->Branch(branchName.c_str(), &trackEdepPerVolume[volName]);
+  }
+
   // Define the list of processes we care about
   std::vector<std::string> predefinedProcesses = {"Attenuation",
                                                   "B+Inelastic",
@@ -232,11 +239,11 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   DS::MC* mc = ds->GetMC();
   runBranch = DS::RunStore::GetRun(ds);
   dsentries++;
-  std::map<std::string, double> edep_per_volume;
+  //std::map<std::string, double> edep_per_volume;
 
   int nTracks = mc->GetMCTrackCount();
   // Clear previous event
-  edep_per_volume.clear();
+  //edep_per_volume.clear();
   trackPDG.clear();
   trackID.clear();
   trackParentID.clear();
@@ -248,10 +255,13 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   trackMomZ.clear();
   trackKE.clear();
   trackEdep.clear();
-  trackEdep.clear();
   trackTime.clear();
   trackProcess.clear();
   trackVolume.clear();
+
+  for (auto& kv : trackEdepPerVolume) {
+    kv.second = 0.0;
+  }
   std::vector<double> xtrack, ytrack, ztrack;
   std::vector<double> pxtrack, pytrack, pztrack;
   std::vector<double> kinetic, globaltime, energy_deposited;
@@ -300,7 +310,8 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       pytrack.push_back(momentum.Y());
       pztrack.push_back(momentum.Z());
       // or step->GetTotalEnergyDeposit(
-      edep_per_volume[vol] += edep;
+      trackEdepPerVolume[vol] += edep;
+      //edep_per_volume[vol] += edep;
     }
 
     trackKE.push_back(kinetic);
@@ -315,7 +326,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
     trackProcess.push_back(processMapID);
     trackVolume.push_back(volumeMapID);
   }
-
+  /*
   if ((edep_per_volume.find("cebr_1") != edep_per_volume.end() && edep_per_volume["cebr_1"] != 0) ||
       (edep_per_volume.find("cebr_2") != edep_per_volume.end() && edep_per_volume["cebr_2"] != 0) ||
       (edep_per_volume.find("cebr_3") != edep_per_volume.end() && edep_per_volume["cebr_3"] != 0) ||
@@ -329,22 +340,22 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       (edep_per_volume.find("scintillator") != edep_per_volume.end() && edep_per_volume["scintillator"] != 0)) {
     outputTree->Fill();
   }
-  /*
-  FOR FUTURE USE!!!!
-    std::vector<std::string> volumes = {
+  */
+  
+  std::vector<std::string> volumes = {
       "cebr_1", "cebr_2", "cebr_3", "cebr_4", "cebr_5",
       "cebr_6", "cebr_7", "cebr_8", "cebr_9", "cebr_10",
       "scintillator"
   };
 
   for (const auto& vol : volumes) {
-      auto it = edep_per_volume.find(vol);
-      if (it != edep_per_volume.end() && it->second != 0) {
+      auto it = trackEdepPerVolume.find(vol);
+      if (it != trackEdepPerVolume.end() && it->second != 0) {
           outputTree->Fill();
           break;  // only need one match
       }
   }
-    */
+    
 
   return Processor::OK;
 }
