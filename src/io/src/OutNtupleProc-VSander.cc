@@ -113,8 +113,10 @@ bool OutNtupleProc::OpenFile(std::string filename) {
     }
   }
 
-  for (const auto& kv : volumeCodeMap) {
-    const std::string& volName = kv.first;
+  std::vector<std::string> my_volumes = {"cebr_1", "cebr_2", "cebr_3", "cebr_4", "scintillator"};
+
+  for (const auto& kv : my_volumes) {
+    const std::string& volName = kv;
     trackEdepPerVolume[volName] = 0.0;
     std::string branchName = "edep_" + volName;
     outputTree->Branch(branchName.c_str(), &trackEdepPerVolume[volName]);
@@ -239,11 +241,11 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   DS::MC* mc = ds->GetMC();
   runBranch = DS::RunStore::GetRun(ds);
   dsentries++;
-  //std::map<std::string, double> edep_per_volume;
+  // std::map<std::string, double> edep_per_volume;
 
   int nTracks = mc->GetMCTrackCount();
   // Clear previous event
-  //edep_per_volume.clear();
+  // edep_per_volume.clear();
   trackPDG.clear();
   trackID.clear();
   trackParentID.clear();
@@ -258,7 +260,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   trackTime.clear();
   trackProcess.clear();
   trackVolume.clear();
-
+  std::vector<std::string> check_volumes = {"cebr_1", "cebr_2", "cebr_3", "cebr_4"};
   for (auto& kv : trackEdepPerVolume) {
     kv.second = 0.0;
   }
@@ -310,8 +312,11 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       pytrack.push_back(momentum.Y());
       pztrack.push_back(momentum.Z());
       // or step->GetTotalEnergyDeposit(
-      trackEdepPerVolume[vol] += edep;
-      //edep_per_volume[vol] += edep;
+      if ((vol == "cebr_1") || (vol == "cebr_2") || (vol == "cebr_3") || vol == ("cebr_4") || vol == ("scintillator")) {
+        trackEdepPerVolume[vol] += edep;
+      }
+
+      // edep_per_volume[vol] += edep;
     }
 
     trackKE.push_back(kinetic);
@@ -341,21 +346,14 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
     outputTree->Fill();
   }
   */
-  
-  std::vector<std::string> volumes = {
-      "cebr_1", "cebr_2", "cebr_3", "cebr_4", "cebr_5",
-      "cebr_6", "cebr_7", "cebr_8", "cebr_9", "cebr_10",
-      "scintillator"
-  };
 
-  for (const auto& vol : volumes) {
-      auto it = trackEdepPerVolume.find(vol);
-      if (it != trackEdepPerVolume.end() && it->second != 0) {
-          outputTree->Fill();
-          break;  // only need one match
-      }
+  for (const auto& vol : check_volumes) {
+    auto it = trackEdepPerVolume.find(vol);
+    if (it != trackEdepPerVolume.end() && it->second != 0) {
+      outputTree->Fill();
+      break;  // only need one match
+    }
   }
-    
 
   return Processor::OK;
 }
