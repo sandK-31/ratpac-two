@@ -260,7 +260,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   trackTime.clear();
   trackProcess.clear();
   trackVolume.clear();
-  std::vector<std::string> check_volumes = {"cebr_1", "cebr_2", "cebr_3", "cebr_4"};
+  std::vector<std::string> check_volumes = {"cebr_1", "cebr_2", "cebr_3", "cebr_4", "scintillator"};
   for (auto& kv : trackEdepPerVolume) {
     kv.second = 0.0;
   }
