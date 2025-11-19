@@ -113,7 +113,7 @@ bool OutNtupleProc::OpenFile(std::string filename) {
     }
   }
 
-  std::vector<std::string> my_volumes = {"cebr_1", "cebr_2", "cebr_3", "cebr_4", "scintillator"};
+  std::vector<std::string> my_volumes = {"NaI_1", "NaI_2", "scintillator"};
 
   for (const auto& kv : my_volumes) {
     const std::string& volName = kv;
@@ -260,7 +260,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
   trackTime.clear();
   trackProcess.clear();
   trackVolume.clear();
-  std::vector<std::string> check_volumes = {"cebr_1", "cebr_2", "cebr_3", "cebr_4", "scintillator"};
+  std::vector<std::string> check_volumes = {"NaI_1", "NaI_2", "scintillator"};
   for (auto& kv : trackEdepPerVolume) {
     kv.second = 0.0;
   }
@@ -312,7 +312,7 @@ Processor::Result OutNtupleProc::DSEvent(DS::Root* ds) {
       pytrack.push_back(momentum.Y());
       pztrack.push_back(momentum.Z());
       // or step->GetTotalEnergyDeposit(
-      if ((vol == "cebr_1") || (vol == "cebr_2") || (vol == "cebr_3") || vol == ("cebr_4") || vol == ("scintillator")) {
+      if ((vol == "NaI_1") || (vol == "NaI_2") || vol == ("scintillator")) {
         trackEdepPerVolume[vol] += edep;
       }
 
