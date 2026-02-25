@@ -2,7 +2,9 @@
 set(RATROOT @RATROOT@)
 set(RATSHARE @RATSHARE@)
 set(ROOT_INCLUDE_PATH @RATROOT@/include)
-set(Ratpac_LIBRARIES @RATROOT@/lib/libRATPAC.so)
+set(Ratpac_LIBRARIES
+    @RATROOT@/lib/libRATPAC${CMAKE_SHARED_LIBRARY_SUFFIX}
+)
 include_directories(SYSTEM @RATROOT@/include/stlplus)
 include_directories(@RATROOT@/include)
 link_directories(@RATROOT@/lib)
